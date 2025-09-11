@@ -1,6 +1,9 @@
 from rest_framework import generics
+from rest_framework.response import Response
+from rest_framework.decorators import api_view
+from rest_framework.reverse import reverse
 from django.contrib.auth import get_user_model
-from .models import Quiz, Question, Option, Response
+from .models import Quiz, Question, Option, Response as QuizResponse
 from .serializers import (
     QuizSerializer,
     QuestionSerializer,
@@ -9,6 +12,12 @@ from .serializers import (
     UserSerializer,
 )
 
+def api_root(request, format=None):
+    return Response({
+        'register': reverse('register', request=request, format=format),
+        'quizzes': reverse('quiz-list-create', request=request, format=format),
+        'response': reverse('response-list-create', request=request, format=format),
+    })
 # List all quizzes / create new quiz
 class QuizListCreateView(generics.ListCreateAPIView):
     queryset = Quiz.objects.all()
