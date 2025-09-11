@@ -1,4 +1,5 @@
 from django.urls import path
+from.import views
 from .views import (
     QuizListCreateView, QuizDetailView,
     QuestionListCreateView, OptionListCreateView,
@@ -6,6 +7,7 @@ from .views import (
 )
 
 urlpatterns = [
+    path('', views.api_root, name='api-root'),
     path("register/", UserRegisterView.as_view(), name="register"),
     path("quizzes/", QuizListCreateView.as_view(), name="quiz-list"),
     path("quizzes/<int:pk>/", QuizDetailView.as_view(), name="quiz-detail"),
