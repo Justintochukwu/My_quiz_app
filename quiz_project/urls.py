@@ -22,6 +22,7 @@ from rest_framework_simplejwt.views import (
 )
 
 urlpatterns = [
+    path('', RedirectView.as_view(url='/api/')),
     path('admin/', admin.site.urls),
     path("api/", include("quiz.urls")),
     
